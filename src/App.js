@@ -5,20 +5,14 @@ import Catalog from "./components/Catalog";
 
 import "./App.css";
 
-// import api from "./api";
-
 export default class App extends React.Component {
   state = {
     beers: []
   };
 
   componentWillMount() {
-    // this.setState({
-    //   beers: api
-    // });
-
     axios
-      .get('https://api.punkapi.com/v2/beers')
+      .get('https://api.punkapi.com/v2/beers?page=1&per_page=6')
       .then(response => {
         this.setState({
           beers: response.data
@@ -39,7 +33,7 @@ export default class App extends React.Component {
           <h2 className="text-muted">find your beer</h2>
         </div>
 
-        <Catalog beers={beers} />
+        <Catalog beers={ beers } />
       </div>
     );
   }
