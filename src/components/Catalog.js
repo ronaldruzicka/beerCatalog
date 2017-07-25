@@ -11,7 +11,7 @@ const Catalog = props => {
     return (
       <Col md="3" key={ beer.id }>
         <Card>
-          <CardImg top width="100%" src={ beer.image_url } alt={ beer.name } />
+          <CardImg className='w-50 mx-auto' top width="100%" src={ beer.image_url } alt={ beer.name }/>
           <CardBlock>
             <CardTitle>{ beer.name }</CardTitle>
             <CardText>{ beer.tagline }</CardText>

@@ -5,7 +5,7 @@ import Catalog from "./components/Catalog";
 
 import "./App.css";
 
-import api from "./api";
+// import api from "./api";
 
 export default class App extends React.Component {
   state = {
@@ -20,7 +20,6 @@ export default class App extends React.Component {
     axios
       .get('https://api.punkapi.com/v2/beers')
       .then(response => {
-        console.log('response: ', response);
         this.setState({
           beers: response.data
         });
@@ -32,8 +31,6 @@ export default class App extends React.Component {
 
   render() {
     const { beers } = this.state;
-
-    console.log("beers state: ", beers);
 
     return (
       <div className="container">
