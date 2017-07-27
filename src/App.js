@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import { initBeers } from './actions/catalog';
 
-import Catalog from './components/Catalog';
-import Loader from './components/Loader';
+import { Grid } from 'react-bootstrap';
 
 import './App.css';
+
+import Catalog from './components/Catalog';
+// import Loader from './components/Loader';
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,14 +21,10 @@ class App extends React.Component {
     const { beers } = this.props;
 
     return (
-      <div className="container">
-        <div className="d-flex align-items-baseline">
-          <h1 className="font-weight-bo`ld mr-2">Beer catalog</h1>
-          <h2 className="text-muted">find your beer</h2>
-        </div>
-
+      <Grid>
+        <h1 className="font-weight-bold mr-2">Beer catalog <span className="h2 text-muted">find your beer</span></h1>
         <Catalog beers={ beers } />
-      </div>
+      </Grid>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import BeerCard from './BeerCard';
 
@@ -13,18 +13,18 @@ export default class Catalog extends Component {
       const { id, image_url, name, tagline } = beer;
 
       return (
-        <Col md='4' key={id}>
+        <Col sm={6} md={4} key={id}>
           <BeerCard id={id} imgUrl={image_url} name={name} tagline={tagline} />
         </Col>
       )
     });
 
     return (
-      <Container>
+      <Grid>
         <Row>
           { beersList }
         </Row>
-      </Container>
+      </Grid>
     );
   }
 };

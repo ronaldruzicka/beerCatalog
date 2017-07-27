@@ -1,3 +1,4 @@
-.App-header {
-
+.thumbnail > img {
+  max-width: 242px;
+  height: 200px;
 }

@@ -6,8 +6,6 @@ import store from './store/configureStore';
 
 import App from './App';
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-
 render(
   <Provider store={ store }>
     <App />
