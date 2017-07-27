@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import beers from './catalog';
+import catalog from './catalog';
 
 const rootReducer = combineReducers ({
-  beers
+  catalog
 });
 
 export default rootReducer;

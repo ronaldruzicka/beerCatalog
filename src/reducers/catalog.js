@@ -1,13 +1,21 @@
-import { INIT_BEERS_SUCCESS } from '../constants';
+import { INIT_BEERS, INIT_BEERS_SUCCESS } from '../constants';
 
-export default (state = [], action) =>  {
+export default (state = { isLoading: true, beers: [] }, action = {}) =>  {
   const { type, payload } = action;
 
   switch (type) {
-    case INIT_BEERS_SUCCESS:
-      const { beers } = payload;
+    case INIT_BEERS:
+      return {
+        ...state,
+        isLoading: payload.isLoading
+      };
 
-      return Array.prototype.concat(state, beers);
+    case INIT_BEERS_SUCCESS:
+      return {
+        ...state,
+        isLoading: payload.isLoading,
+        beers: payload.beers
+      };
 
     default:
       return state;
