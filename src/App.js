@@ -1,35 +1,27 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import Catalog from "./components/Catalog";
+import { initBeers } from './actions/catalog';
 
-import "./App.css";
+import Catalog from './components/Catalog';
+import Loader from './components/Loader';
 
-export default class App extends React.Component {
-  state = {
-    beers: []
-  };
+import './App.css';
 
-  componentWillMount() {
-    axios
-      .get('https://api.punkapi.com/v2/beers?page=1&per_page=6')
-      .then(response => {
-        this.setState({
-          beers: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+class App extends React.Component {
+  componentDidMount() {
+    const { initBeers } = this.props;
+
+    initBeers();
   }
 
   render() {
-    const { beers } = this.state;
+    const { beers } = this.props;
 
     return (
       <div className="container">
         <div className="d-flex align-items-baseline">
-          <h1 className="font-weight-bold mr-2">Beer catalog</h1>
+          <h1 className="font-weight-bo`ld mr-2">Beer catalog</h1>
           <h2 className="text-muted">find your beer</h2>
         </div>
 
@@ -38,3 +30,10 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default connect(state => {
+  const { beers } = state;
+  return { beers };
+}, {
+  initBeers
+})(App);
