@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import BeerCard from './BeerCard';
 
@@ -20,11 +20,9 @@ export default class Catalog extends Component {
     });
 
     return (
-      <Grid>
-        <Row>
-          { beersList }
-        </Row>
-      </Grid>
+      <Row>
+        { beersList }
+      </Row>
     );
   }
 };

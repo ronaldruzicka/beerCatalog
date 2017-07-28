@@ -1,33 +1,36 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { INIT_BEERS, INIT_BEERS_SUCCESS, INIT_BEERS_ERROR } from '../constants';
+import {
+  LOAD_BEERS,
+  LOAD_BEERS_ERROR,
+  LOAD_BEERS_SUCCESS
+} from "../constants";
 
-export const initBeers = () => {
+export const loadBeers = (currentPage = 1) => {
   return dispatch => {
     dispatch({
-      type: INIT_BEERS,
+      type: LOAD_BEERS,
       payload: {
         isLoading: true
       }
     });
 
-    setTimeout(() => {
-      axios
-      .get('https://api.punkapi.com/v2/beers?page=1&per_page=6')
+    axios
+      .get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=6`)
       .then(response => {
         dispatch({
-          type: INIT_BEERS_SUCCESS,
+          type: LOAD_BEERS_SUCCESS,
           payload: {
             isLoading: false,
+            currentPage: currentPage,
             beers: response.data
           }
-        })
+        });
       })
       .catch(() => {
         dispatch({
-          type: INIT_BEERS_ERROR
-        })
+          type: LOAD_BEERS_ERROR
+        });
       });
-    }, 2000);
   };
 };

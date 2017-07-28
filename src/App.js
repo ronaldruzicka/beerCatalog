@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { initBeers } from './actions/catalog';
+import { loadBeers } from './actions/catalog';
 
-import { Grid } from 'react-bootstrap';
+import { Grid, Pagination } from 'react-bootstrap';
 
 import './App.css';
 
@@ -12,29 +12,48 @@ import Loader from './components/Loader';
 
 class App extends React.Component {
   componentDidMount() {
-    const { initBeers } = this.props;
+    const { loadBeers } = this.props;
 
-    initBeers();
+    loadBeers();
+  }
+
+  changePage = (page) => {
+    const { loadBeers } = this.props;
+
+    console.log(page);
+    loadBeers(page);
   }
 
   render() {
-    const { isLoading, beers } = this.props.catalog;
+    const { isLoading, beers, currentPage } = this.props.catalog;
 
     const content = isLoading ? <Loader /> : <Catalog beers={ beers } />;
 
     return (
       <Grid>
         <h1 className="font-weight-bold mr-2">Beer catalog <span className="h2 text-muted">find your beer</span></h1>
-        { content }
+        <hr />
+        <Pagination
+          items={20}
+          next
+          prev
+          first
+          last
+          boundaryLinks
+          maxButtons={5}
+          activePage={currentPage}
+          onSelect={this.changePage} />
+        {content}
       </Grid>
     );
   }
 }
 
 export default connect(state => {
+  console.log(state);
   const { catalog } = state;
 
   return { catalog };
 }, {
-  initBeers
+  loadBeers
 })(App);
