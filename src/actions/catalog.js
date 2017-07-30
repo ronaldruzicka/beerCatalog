@@ -48,9 +48,13 @@ export const loadBeers = (currentPage = 1) => {
             }
           });
         })
-        .catch(() => {
+        .catch((error) => {
           dispatch({
-            type: LOAD_BEERS_ERROR
+            type: LOAD_BEERS_ERROR,
+            payload: {
+              isLoading: false,
+              message: error || 'Please try to turn if off and on again.'
+            }
           });
         });
     }

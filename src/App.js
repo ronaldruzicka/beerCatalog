@@ -8,6 +8,7 @@ import { Grid, Pagination } from 'react-bootstrap';
 import './App.css';
 
 import Catalog from './components/Catalog';
+import ErrorMessage from './components/ErrorMessage';
 import Loader from './components/Loader';
 
 class App extends React.Component {
@@ -23,8 +24,15 @@ class App extends React.Component {
     loadBeers(page);
   }
 
+  hideErrorMessage = () => {
+    this.setState({
+      errorMessage: false
+    })
+  }
+
   render() {
-    const { isLoading, pages, currentPage } = this.props.catalog;
+    const { loadBeers } = this.props;
+    const { isLoading, pages, currentPage, errorMessage  } = this.props.catalog;
     let filteredBeers;
 
     // get beers from state which correspond with the current page
@@ -34,12 +42,19 @@ class App extends React.Component {
       }
     });
 
+    if (errorMessage) {
+      return (
+        <ErrorMessage message={errorMessage} onDismiss={this.hideErrorMessage} loadBeers={loadBeers} />
+      )
+    }
+
     const content = isLoading ? <Loader /> : <Catalog beers={ filteredBeers } />;
 
     return (
       <Grid>
         <h1 className="font-weight-bold mr-2">Beer catalog <span className="h2 text-muted">find your beer</span></h1>
         <hr />
+
         <Pagination
           items={20}
           next

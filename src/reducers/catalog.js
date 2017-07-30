@@ -1,4 +1,9 @@
-import { LOAD_BEERS, LOAD_BEERS_SUCCESS, GET_SAVED_BEERS } from '../constants';
+import {
+  LOAD_BEERS,
+  LOAD_BEERS_SUCCESS,
+  LOAD_BEERS_ERROR,
+  GET_SAVED_BEERS
+} from '../constants';
 
 const defaultState = {
   isLoading: true,
@@ -39,6 +44,13 @@ export default (state = defaultState, action = {}) => {
           ...state,
           isLoading: payload.isLoading,
           currentPage: payload.currentPage
+        }
+
+      case LOAD_BEERS_ERROR:
+        return {
+          ...state,
+          isLoading: payload.isLoading,
+          errorMessage: payload.error
         }
 
     default:
