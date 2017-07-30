@@ -20,14 +20,21 @@ class App extends React.Component {
   changePage = (page) => {
     const { loadBeers } = this.props;
 
-    console.log(page);
     loadBeers(page);
   }
 
   render() {
-    const { isLoading, beers, currentPage } = this.props.catalog;
+    const { isLoading, pages, currentPage } = this.props.catalog;
+    let filteredBeers;
 
-    const content = isLoading ? <Loader /> : <Catalog beers={ beers } />;
+    // get beers from state which correspond with the current page
+    pages.forEach((page) => {
+      if (page.id === currentPage) {
+        filteredBeers = page.beers;
+      }
+    });
+
+    const content = isLoading ? <Loader /> : <Catalog beers={ filteredBeers } />;
 
     return (
       <Grid>
@@ -43,17 +50,18 @@ class App extends React.Component {
           maxButtons={5}
           activePage={currentPage}
           onSelect={this.changePage} />
-        {content}
+        { content }
       </Grid>
     );
   }
 }
 
 export default connect(state => {
-  console.log(state);
   const { catalog } = state;
 
   return { catalog };
 }, {
   loadBeers
 })(App);
+
+

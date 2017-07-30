@@ -1,6 +1,16 @@
-import { LOAD_BEERS, LOAD_BEERS_SUCCESS } from '../constants';
+import { LOAD_BEERS, LOAD_BEERS_SUCCESS, GET_SAVED_BEERS } from '../constants';
 
-export default (state = { isLoading: true, beers: [] }, action = {}) => {
+const defaultState = {
+  isLoading: true,
+  pages: [
+    {
+      id: null,
+      beers: []
+    }
+  ]
+};
+
+export default (state = defaultState, action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -15,8 +25,21 @@ export default (state = { isLoading: true, beers: [] }, action = {}) => {
         ...state,
         isLoading: payload.isLoading,
         currentPage: payload.currentPage,
-        beers: payload.beers
+        pages: [
+          ...state.pages,
+          {
+            id: payload.currentPage,
+            beers: payload.beers
+          }
+        ]
       };
+
+      case GET_SAVED_BEERS:
+        return {
+          ...state,
+          isLoading: payload.isLoading,
+          currentPage: payload.currentPage
+        }
 
     default:
       return state;

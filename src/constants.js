@@ -1,3 +1,4 @@
 export const LOAD_BEERS = 'LOAD_BEERS';
 export const LOAD_BEERS_SUCCESS = 'LOAD_BEERS_SUCCESS';
 export const LOAD_BEERS_ERROR = 'LOAD_BEERS_ERROR';
+export const GET_SAVED_BEERS = 'GET_SAVED_BEERS';
